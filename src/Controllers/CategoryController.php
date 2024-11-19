@@ -31,7 +31,7 @@ class CategoryController extends Controller
         $this->authorize('view', $category);
 
         $page = $category->pages->first();
-        $subCategory = $category->categories->first();
+        $subCategory = $category->categories()->scopes('enabled')->first();
 
         if ($page === null && $subCategory !== null) {
             $page = $subCategory->pages->first();
